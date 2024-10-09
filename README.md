@@ -28,12 +28,9 @@ docsify serve docs -p 4000
 List of features embedded with this SK
 
 | Features                                      | DevOps                        | CI/CD                             |
-| --------------------------------------------- | ----------------------------- | --------------------------------- |
+| --------------------------------------------- | ----------------------------- | --------------------------------- | --- | --- |
 | REST API                                      | Helm Chart                    | Automated semantic releasing      |
-| TypeScript on FE & BE                         | Docker build                  | Sentry releasing                  |
-| Object Storage support                        |                               |                                   |
-| I18n module (with i18next)                    |                               |                                   |
-| Client-Side-Field-Lebel-Encryption (CSFLE)    |                               |                                   |
+| TypeScript on FE & BE                         | Docker build                  | Sentry releasing                  |     |     |
 | Fully configurable over environment variables | Guidelines for k8s setup      | Typescript checks                 |
 | Sentry implementation & tracking              | CDN support for static assets | ESlint/Prettier checks            |
 | Asynchronous worker & scheduler (bull)        |                               | Commit messages checks            |
@@ -48,6 +45,9 @@ List of features embedded with this SK
 | Object Storage support                        |                               |                                   |
 | I18n module (with i18next)                    |                               |                                   |
 | Client-Side-Field-Lebel-Encryption (CSFLE)    |                               |                                   |
+| Object Storage support                        |                               |                                   |
+| I18n module (with i18next)                    |                               |                                   |
+| Client-Side-Field-Lebel-Encryption (CSFLE)    |
 
 Security practices have been applied on this project based on experiences and feedbacks.
 However, this is only a starter-kit as an helper to boostrap your project.
