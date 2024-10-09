@@ -1,9 +1,9 @@
-# VORP Chat
+# ISO KIT REST
 
-The goal of this project is to provide a flexible real time chat application to both integrate into existing VORP system and act as a dedicated application.
-It is developed and maintained by [Visible One][vo] and follows the practices we believe in.
+The goal of this project is to provide a boilerplate isomorphic application for a REST API.
+It is developed and maintained by [Kaung Htet Kyaw][kg] and follows the practices we believe in.
 
-[vo]: https://visibleone.com/
+[kg]: https://github.com/Kaung-HtetKyaw
 
 ## Setup
 
