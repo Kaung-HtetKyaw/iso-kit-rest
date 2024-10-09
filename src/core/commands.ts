@@ -7,7 +7,6 @@ import { HealthStatus, HealthStatusManager } from './health';
 import { getDatabaseContext } from '../database/instance';
 import { migrate } from '../database/migrate';
 import { DatabaseClientManager } from '../data-operations';
-import { createSocketServer } from './createSocketServer';
 
 export const composeCommand = (...shutdowns: (() => Promise<unknown>)[]) => {
     const onExit = () => {

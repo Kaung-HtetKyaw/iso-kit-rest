@@ -17,10 +17,10 @@ services:
             - minio:/data
     mysql:
         image: mysql:latest
-        container_name: vorp_chat_mysql
+        container_name: iso-rest-mysql
         environment:
             MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: vorp
+            MYSQL_DATABASE: app
             MYSQL_PASSWORD: password
         ports:
             - '3306:3306'
@@ -28,7 +28,7 @@ services:
             - dbdata:/var/lib/mysql
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
-        container_name: vorp_chat_pma
+        container_name: iso-rest-phpmyadmin
         links:
             - mysql
         environment:
@@ -43,7 +43,7 @@ services:
         # can be replace by ghcr.io/appvantageasia/mongo-entreprise:X.X.X
         # changes to be done in override file
         image: mongo:5.0.6
-        container_name: vorp-chat-mongo
+        container_name: iso-rest-mongo
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: password
@@ -60,7 +60,7 @@ services:
             ME_CONFIG_MONGODB_ADMINUSERNAME: root
             ME_CONFIG_MONGODB_ADMINPASSWORD: password
             ME_CONFIG_MONGODB_PORT: 27017
-            ME_CONFIG_MONGODB_SERVER: vorp-chat-mongo
+            ME_CONFIG_MONGODB_SERVER: iso-rest-mongo
             ME_CONFIG_BASICAUTH_USERNAME: root
             ME_CONFIG_BASICAUTH_PASSWORD: password
 

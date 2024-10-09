@@ -1,16 +1,12 @@
 import { Express, Router, Response, NextFunction } from 'express';
 import { Query, ParamsDictionary, Request as CoreRequest } from 'express-serve-static-core';
-import whatsAppRouter from './whatsapp';
-import { Operations } from '../data-operations';
 import { OperationsContext } from '../database/instance';
-import phoneNumberRouter from './phoneNumber';
-import messagesRouter from './messages';
 import { Server } from 'socket.io';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
 export type SocketServerInstance = Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>;
 
-export type HandlerContext = { operations: OperationsContext; io: SocketServerInstance };
+export type HandlerContext = { operations: OperationsContext };
 
 export type RouterHander = (context: HandlerContext) => Router;
 
@@ -39,30 +35,15 @@ export type MiddlewareHandler<
     ReqQuery = Query,
     Locals extends Record<string, any> = { test: string }
 > = (
-    context: Omit<HandlerContext, 'io'>
+    context: HandlerContext
 ) => (
     req: RouteRequest<P, ResBody, ReqBody, ReqQuery, Locals>,
     res: Response,
     next: NextFunction
 ) => Promise<void> | void;
 
-const connectRouters = ({
-    expressServer,
-    operations,
-    io,
-}: {
-    expressServer: Express;
-    operations: OperationsContext;
-    io: SocketServerInstance;
-}) => {
-    // employee route
-    expressServer.use('/api/whatsapp', whatsAppRouter({ operations, io }));
-
-    // phone number route
-    expressServer.use('/api/phonenumber', phoneNumberRouter({ operations, io }));
-
-    // messages route
-    expressServer.use('/api/messages', messagesRouter({ operations, io }));
+const connectRouters = ({ expressServer, operations }: { expressServer: Express; operations: OperationsContext }) => {
+    // add route handlers here
 };
 
 export default connectRouters;

@@ -1,7 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { DocumentList } from '../../sharedTypes';
 import { z } from 'zod';
-import { WhatsappEntryDetails, WhatsappGenericMessage } from '../../../../routers/webhooks/types';
 
 export const MessageSchema = z.object({
     _id: z.instanceof(ObjectId).optional(),
@@ -13,8 +12,6 @@ export const MessageSchema = z.object({
     timestamp: z.number(),
 });
 
-export type MessageDocument<T = WhatsappGenericMessage> = z.infer<typeof MessageSchema> & {
-    whatsapp?: WhatsappEntryDetails<T> | null;
-};
+export type MessageDocument = z.infer<typeof MessageSchema>;
 
 export type MessageDocumentList = DocumentList<MessageDocument>;

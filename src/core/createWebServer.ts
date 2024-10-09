@@ -15,7 +15,6 @@ import setupPrometheusMetrics from './prometheus';
 import connectRouters from '../routers';
 import { createServices, DatabaseClientManager } from '../data-operations';
 import { authMiddleware } from '../middlewares/auth';
-import { createSocketServer } from './createSocketServer';
 
 export type WebServerCreation = {
     httpServer: Server;
@@ -114,12 +113,10 @@ const createWebServer = async (databaseClientManager: DatabaseClientManager): Pr
     // start workers
     const stopWorker = await startWorker();
 
-    const socketServerInstance = await createSocketServer({ server: httpServer, context: { operations } });
-
     // application middlewares
     expressServer.use([authMiddleware({ operations })]);
 
-    connectRouters({ expressServer, operations, io: socketServerInstance });
+    connectRouters({ expressServer, operations });
 
     // sse the sentry error handler before any other error handler
     expressServer.use(Sentry.Handlers.errorHandler());
