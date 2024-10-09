@@ -1,0 +1,60 @@
+version: '3.5'
+
+services:
+    redis:
+        image: redis:6.2.6
+        command: redis-server --appendonly yes
+        volumes:
+            - redis:/data
+
+    minio:
+        image: minio/minio
+        environment:
+            MINIO_ROOT_USER: 'AKIAIOSFODNN7EXAMPLE' # or any user name you like , this will be used to log in to minio dashboard
+            MINIO_ROOT_PASSWORD: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+        command: ['server', '/data', '--console-address', ':9001']
+        volumes:
+            - minio:/data
+
+    mongo:
+        # can be replace by ghcr.io/appvantageasia/mongo-entreprise:X.X.X
+        # changes to be done in override file
+        image: mongo:4.4.6
+        container_name: vorp-chat-mongo
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: password
+        volumes:
+            - mongo:/data/db
+        networks:
+            - mongo-compose-network
+
+    mongo-express:
+        image: mongo-express:latest
+        container_name: mongo-express
+        restart: always
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            ME_CONFIG_MONGODB_ADMINPASSWORD: password
+            ME_CONFIG_MONGODB_PORT: 27017
+            ME_CONFIG_MONGODB_SERVER: vorp-chat-mongo
+            ME_CONFIG_BASICAUTH_USERNAME: root
+            ME_CONFIG_BASICAUTH_PASSWORD: password
+
+        ports:
+            - 8081:8081
+        links:
+            - mongo
+        depends_on:
+            - mongo
+        networks:
+            - mongo-compose-network
+
+volumes:
+    redis:
+    mongo:
+    minio:
+        driver: local
+networks:
+    mongo-compose-network:
+        driver: bridge

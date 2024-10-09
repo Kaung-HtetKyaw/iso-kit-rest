@@ -1,0 +1,27 @@
+# .gitlab-ci.yml
+
+image: node:latest
+
+stages:
+    - build
+    - release
+
+# make this separate jobs after changing max artifact size
+
+build:
+  stage: build
+  script:
+    - yarn install --frozen-lockfile
+    - yarn check-types
+    - yarn build
+
+release:
+    stage: release
+    needs:
+      - build
+    only:
+        - main
+        - development
+    script:
+        - yarn install --frozen-lockfile
+        - yarn semantic-release

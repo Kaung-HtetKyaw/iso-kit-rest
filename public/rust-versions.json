@@ -1,0 +1,28 @@
+{
+    "latest_version": {
+        "version": "0.3.2",
+        "download_urls": {
+            "window": "https://timetracking.visibleone.com/uploads/rust-agent/0.3.2.exe",
+            "linux": "",
+            "mac_os": ""
+        }
+    },
+    "versions": [
+        {
+            "version": "0.3.2",
+            "download_urls": {
+                "window": "https://timetracking.visibleone.com/uploads/rust-agent/0.3.2.exe",
+                "linux": "",
+                "mac_os": ""
+            }
+        },
+        {
+            "version": "0.3.1",
+            "download_urls": {
+                "window": "https://timetracking.visibleone.com/uploads/rust-agent/0.3.1.exe",
+                "linux": "",
+                "mac_os": ""
+            }
+        }
+    ]
+}
