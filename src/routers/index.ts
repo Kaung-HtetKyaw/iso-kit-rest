@@ -3,6 +3,7 @@ import { Query, ParamsDictionary, Request as CoreRequest } from 'express-serve-s
 import { OperationsContext } from '../database/instance';
 import { Server } from 'socket.io';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import testRouter from './testRouters';
 
 export type SocketServerInstance = Server<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>;
 
@@ -44,6 +45,8 @@ export type MiddlewareHandler<
 
 const connectRouters = ({ expressServer, operations }: { expressServer: Express; operations: OperationsContext }) => {
     // add route handlers here
+    // employee route
+    expressServer.use('/api/tests', testRouter({ operations }));
 };
 
 export default connectRouters;

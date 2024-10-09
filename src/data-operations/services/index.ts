@@ -4,9 +4,9 @@ import { UserCollections } from './user/documents';
 import createUserService, { UserOperations } from './user';
 import createMessageService, { MessageCollections, MessageOperations } from './message';
 
-export interface Collections extends UserCollections, MessageCollections {}
+export interface Collections extends UserCollections, MessageCollections, TestCollections {}
 
-export interface Operations extends UserOperations, MessageOperations {}
+export interface Operations extends UserOperations, MessageOperations, TestOperations {}
 
 export type ServiceBuilder = (db: Db) => {
     collections: Partial<Collections>;
@@ -16,6 +16,7 @@ export type ServiceBuilder = (db: Db) => {
 const services: { [serviceName: string]: ServiceBuilder } = {
     user: createUserService,
     message: createMessageService,
+    test: createTestService,
 };
 
 export const validations = {};
